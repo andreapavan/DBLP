@@ -1,0 +1,187 @@
+*{
+margin:0;
+padding:0;
+}
+
+@font-face {
+font-family: 'GillSansMT';
+src: local('Gill Sans MT'), url('Gill Sans MT.ttf') format('truetype');
+}
+
+body{
+width:800px;
+margin:10px auto;
+}
+
+#intestazione{
+width:500px;
+height:100px;
+font-variant:small-caps;
+font-family:"GillSansMT","Helvetica","Arial",sans-serif;
+font-size:22pt;
+color:#4194f0;
+}
+
+#intestazione p{
+position:relative;
+top:30px;
+left:10px;
+height:30px;
+width:480px;
+}
+
+#dblp_logo{
+color:#fff;
+width:110px;
+height:70;
+background-color: #4194f0;
+border-radius:10px;
+float:left;
+}
+
+#dblp_logo p{
+width:60px;
+position:relative;
+left:30px;
+top:30px;
+}
+
+#universita{
+width:200px;
+height:100px;
+float:right;
+}
+
+#universita p{
+font-family:"GillSansMT","Helvetica", "Arial", sans-serif;
+font-size:10pt;
+font-variant:small-caps;
+margin-top:30px;
+}
+
+#logo_uniud{
+padding-right:10px;
+width:100px;
+height:100px;
+float:left;
+}
+
+#login{
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+width:250px;
+}
+
+#menunavigazione{
+margin-top:5px;
+}
+
+#menunavigazione a{
+font-family: "Trebuchet MS","Helvetica", "Arial", sans-serif;
+padding:6px 20px 9px 20px;
+font-size:13pt;
+color:#000;
+text-decoration:none;
+}
+
+#menunavigazione .menu1 a{
+border-top:6px solid #6bb8ff;
+}
+
+#menunavigazione .menu1 a:hover{
+color:#FFF;
+background-color:#6bb8ff;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#menunavigazione .menu2 a{
+border-top:6px solid #7a9eff;
+}
+
+#menunavigazione .menu2 a:hover{
+color:#FFF;
+background-color:#7a9eff;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#menunavigazione .menu3 a{
+border-top:6px solid #4f5bff;
+}
+
+#menunavigazione .menu3 a:hover{
+color:#FFF;
+background-color:#4f5bff;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#menunavigazione .menu4 a{
+border-top:6px solid #2D46CE;
+}
+
+#menunavigazione .menu4 a:hover{
+color:#FFF;
+background-color:#2D46CE;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#menunavigazione .menu5 a{
+border-top:6px solid #2D46CE;
+}
+
+#menunavigazione .menu5 a:hover{
+color:#FFF;
+background-color:#2D46CE;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#formregistrazione{
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+width:600px;
+}
+
+td{
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+padding:5px;
+}
+
+.inputtextform{
+border:1px solid #bbbbbb;
+padding:8px;
+border-radius: 5px;
+width:200px;
+}
+
+.submitbutton{
+width:100px;
+}
+/* Notifiche JAVASCRIPT */
+.statoform{
+margin-left:10px;
+color:red;
+display:none;
+}
+
+#stato_sessione{
+position:relative;
+left:600px;
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+padding:8px;
+width:150px;
+}
