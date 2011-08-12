@@ -1,9 +1,9 @@
 <?php
 $connetti=mysql_connect('localhost','pablo89space','andreapavan1989');
 
-/*  ------------------------------------
+/*  --------------------------------------------
 	FUNZIONE DI REGISTRAZIONE DELL'UTENTE NEL DB
-	------------------------------------
+	--------------------------------------------
 */
 
 function insertUser() {
@@ -11,9 +11,10 @@ function insertUser() {
 	$cognome=$_POST["cognome"];
 	$email=$_POST["email"];
 	$password=$_POST["password"];
+	$password_cript=md5($password);
 	$username=$_POST["username"];
 	global $connetti;
-	$sql="INSERT INTO my_pablo89space.utenti SET nome='$nome',cognome='$cognome',email='$email',password='$password',username='$username'";
+	$sql="INSERT INTO my_pablo89space.utenti SET nome='$nome',cognome='$cognome',email='$email',password='$password_cript',username='$username'";
 	$query=mysql_query($sql,$connetti);
 	$message="
 	<html>
@@ -33,17 +34,18 @@ function insertUser() {
 	mail($email,"Benvenuto in DBLP Bibliography",$message,$headers);
 }
 
-/*  ----------------------------
+/*  ---------------------------------------------
 	FUNZIONE PER CONTROLLO UTENTE
 	
 	La funzione checkUser permette di verfificare
 	se l'utente è registrato nel database.
 	Ritorna un valore booleano TRUE o FALSE.
-	----------------------------
+	---------------------------------------------
 */
 
 function checkUser($username,$password) {
 	global $connetti;
+	$password=md5($password);
 	$sql_read = "SELECT nome,cognome FROM my_pablo89space.utenti WHERE username='$username'&&password='$password'";
 	$query2=mysql_query($sql_read,$connetti);
 	$array_result=mysql_fetch_row($query2);
@@ -54,14 +56,14 @@ function checkUser($username,$password) {
 	}
 }
 
-/*  ----------------------------
+/*  --------------------------------------------------------
 	FUNZIONI PER CONTROLLO EMAIL
 	
 	*	La funzione isUniqueEmail controlla se la mail è già
 		stata utilizzata per la registrazione di un altro
 		utente. Ritorna pertanto un valore booleano TRUE se
 		l'indirizzo non è mai stato utilizzato.
-	----------------------------
+	--------------------------------------------------------
 */
 
 function isUniqueEmail($email) {

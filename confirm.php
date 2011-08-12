@@ -25,6 +25,7 @@ include ("functions.php");
 	<?php
 		if ((isset($_POST["button-confirm"]))&&(isUniqueEmail($_POST["email"]))){
 			echo "Complimenti, registrazione effettuata con successo.";
+			insertUser();
 		}else{
 			echo "Indirizzo email gi&agrave utilizzato";
 		}

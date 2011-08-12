@@ -170,6 +170,7 @@ width:200px;
 .submitbutton{
 width:100px;
 }
+
 /* Notifiche JAVASCRIPT */
 .statoform{
 margin-left:10px;
@@ -185,3 +186,49 @@ font-size:10pt;
 padding:8px;
 width:150px;
 }
+
+#divsearch {
+width:400px;
+padding:10px;
+border-radius:5px;
+}
+
+#divsearch h2 {
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:15pt;
+margin-bottom:20px;
+}
+
+#contenuto h2 {
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:15pt;
+margin-bottom:20px;
+}
+
+#contenuto {
+width:800px;
+height:400px;
+float:left;
+margin-top:30px;
+padding:10px;
+border-top:1px solid #bbb;
+}
+
+#contenuto li {
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+padding:3px;
+}
+
+#contenuto a{
+text-decoration:none;
+color:#000;
+border-radius:3px;
+padding:3px;
+}
+
+#contenuto li a:hover {
+background-color:#4194f0;
+color:#fff;
+}
+

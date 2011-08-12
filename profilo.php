@@ -33,9 +33,39 @@ include ("functions.php");
 				<input type="submit" name="button-logout" value="Logout"/>
 			</form>
 		</div>
-		<div id="contenuto_utente">
-			<h1>The DBLP Computer Science Bibliography</h1>
-			<h2>Search</h2>
+		<div id="divsearch">
+			<h2>Ricerca Autore</h2>
+			<form method="get" id="search" action="profilo.php">
+				<input type="text" class="inputtextform" name="search"/>
+				<input type="submit" value="Search" class="submitbutton" name="submit-button-search" id="submit-search"/>
+			</form>
 		</div>
+		<div id="contenuto">
+		<?php
+			if (isset($_SESSION["user"])){
+				if (isset($_GET["submit-button-search"])) {
+				echo ("<h2>Risultati ricerca per: ".$_GET["search"]."</h2>");
+				}
+				$url="http://dblp.uni-trier.de/search/author?xauthor=";
+				$author_search=$_GET["search"];
+				//$a=explode(" ",$author_search);
+				//print_r($a);
+				//$author=$a[0]."$ ".$a[1]."$";
+				//echo ($author);
+				$url=$url.$author_search;
+				$array_xml=simplexml_load_file($url);
+				//echo (count($b));
+				if ($author_search!="") {
+					for ($i=0;$i<count($array_xml);$i++) {
+						$attr=$array_xml->author->$i->attributes();
+						//print_r($attr);
+						echo ("<li><a href="."http://dblp.uni-trier.de/rec/pers/".$attr["urlpt"]."/xk>".$array_xml->author->$i."</a></li>");
+					}
+				}
+			}else{
+				echo "<h2>Devi loggarti per effettuare la ricerca degli autori! Vai al <a href='index.php'>Login</a></h2>";
+			}	
+			?>	
+		</div>		
 	</body>
 </html>
