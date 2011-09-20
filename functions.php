@@ -1,5 +1,5 @@
 <?php
-$connetti=mysql_connect('localhost','pablo89space','andreapavan1989');
+$connetti=mysql_connect('localhost','root','root');
 
 /*  --------------------------------------------
 	FUNZIONE DI REGISTRAZIONE DELL'UTENTE NEL DB
@@ -14,7 +14,7 @@ function insertUser() {
 	$password_cript=md5($password);
 	$username=$_POST["username"];
 	global $connetti;
-	$sql="INSERT INTO my_pablo89space.utenti SET nome='$nome',cognome='$cognome',email='$email',password='$password_cript',username='$username'";
+	$sql="INSERT INTO progetto.utenti SET nome='$nome',cognome='$cognome',email='$email',password='$password_cript',username='$username'";
 	$query=mysql_query($sql,$connetti);
 	$message="
 	<html>
@@ -46,7 +46,7 @@ function insertUser() {
 function checkUser($username,$password) {
 	global $connetti;
 	$password=md5($password);
-	$sql_read = "SELECT nome,cognome FROM my_pablo89space.utenti WHERE username='$username'&&password='$password'";
+	$sql_read = "SELECT nome,cognome FROM progetto.utenti WHERE username='$username'&&password='$password'";
 	$query2=mysql_query($sql_read,$connetti);
 	$array_result=mysql_fetch_row($query2);
 	if ($array_result[0]==NULL) {
@@ -68,7 +68,7 @@ function checkUser($username,$password) {
 
 function isUniqueEmail($email) {
 	global $connetti;
-	$sql_controlla_mail="SELECT email FROM my_pablo89space.utenti WHERE email='$email'";
+	$sql_controlla_mail="SELECT email FROM progetto.utenti WHERE email='$email'";
 	$query_mail=mysql_query($sql_controlla_mail,$connetti);
 	$risultato=mysql_fetch_row($query_mail);
 	if ($risultato[0]== NULL) {
@@ -85,7 +85,7 @@ function isUniqueEmail($email) {
 
 function recoverInfo ($username) {
 	global $connetti;
-	$sql_info = "SELECT nome,cognome,username id FROM my_pablo89space.utenti WHERE username='$username'";
+	$sql_info = "SELECT nome,cognome,username id FROM progetto.utenti WHERE username='$username'";
 	$query4=mysql_query($sql_info,$connetti);
 	$array_result=mysql_fetch_row($query4);
 	return $array_result;

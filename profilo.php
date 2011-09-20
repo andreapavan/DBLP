@@ -42,7 +42,7 @@ include ("functions.php");
 		</div>
 		<div id="contenuto">
 		<?php
-			if (isset($_SESSION["user"])){
+			//if (isset($_SESSION["user"])){
 				if (isset($_GET["submit-button-search"])) {
 				echo ("<h2>Risultati ricerca per: ".$_GET["search"]."</h2>");
 				}
@@ -54,17 +54,18 @@ include ("functions.php");
 				//echo ($author);
 				$url=$url.$author_search;
 				$array_xml=simplexml_load_file($url);
+				print_r($array_xml);
 				//echo (count($b));
 				if ($author_search!="") {
 					for ($i=0;$i<count($array_xml);$i++) {
-						$attr=$array_xml->author->$i->attributes();
+						//$attr=$array_xml->author->$i->attributes();
 						//print_r($attr);
-						echo ("<li><a href="."http://dblp.uni-trier.de/rec/pers/".$attr["urlpt"]."/xk>".$array_xml->author->$i."</a></li>");
+						echo ("<li><a href="."http://dblp.uni-trier.de/rec/pers/"/*.$attr["urlpt"]*/."/xk>".$array_xml->author->$i."</a></li>");
 					}
 				}
-			}else{
+			/*}else{
 				echo "<h2>Devi loggarti per effettuare la ricerca degli autori! Vai al <a href='index.php'>Login</a></h2>";
-			}	
+			}*/	
 			?>	
 		</div>		
 	</body>
