@@ -13,16 +13,19 @@ width:800px;
 margin:10px auto;
 }
 
-#intestazione{
+#titolo{
 width:500px;
 height:100px;
 font-variant:small-caps;
 font-family:"GillSansMT","Helvetica","Arial",sans-serif;
 font-size:22pt;
 color:#4194f0;
+float:left;
+margin-right:100px;
+padding-left:10px;
 }
 
-#intestazione p{
+#titolo p{
 position:relative;
 top:30px;
 left:10px;
@@ -46,37 +49,33 @@ left:30px;
 top:30px;
 }
 
-#universita{
-width:200px;
-height:100px;
+#wrapper{
+padding:10px;
+height:700px;
+}
+
+#content{
+width:500px;
+padding-bottom:50px;
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+}
+
+#sidebar{
+margin-top:55px;
+text-align:center;
+width:220px;
+padding-bottom:50px;
 float:right;
 }
 
-#universita p{
-font-family:"GillSansMT","Helvetica", "Arial", sans-serif;
-font-size:10pt;
-font-variant:small-caps;
-margin-top:30px;
+#menu{
+margin-bottom:10px;
+width:530px;
+height:50px;
 }
 
-#logo_uniud{
-padding-right:10px;
-width:100px;
-height:100px;
-float:left;
-}
-
-#login{
-font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
-font-size:10pt;
-width:250px;
-}
-
-#menunavigazione{
-margin-top:5px;
-}
-
-#menunavigazione a{
+#menu a{
 font-family: "Trebuchet MS","Helvetica", "Arial", sans-serif;
 padding:6px 20px 9px 20px;
 font-size:13pt;
@@ -84,11 +83,11 @@ color:#000;
 text-decoration:none;
 }
 
-#menunavigazione .menu1 a{
+#menu .menu1 a{
 border-top:6px solid #6bb8ff;
 }
 
-#menunavigazione .menu1 a:hover{
+#menu .menu1 a:hover{
 color:#FFF;
 background-color:#6bb8ff;
 -webkit-border-bottom-left-radius: 9px;
@@ -97,11 +96,11 @@ background-color:#6bb8ff;
 -moz-border-radius-bottomright: 9px;
 }
 
-#menunavigazione .menu2 a{
+#menu .menu2 a{
 border-top:6px solid #7a9eff;
 }
 
-#menunavigazione .menu2 a:hover{
+#menu .menu2 a:hover{
 color:#FFF;
 background-color:#7a9eff;
 -webkit-border-bottom-left-radius: 9px;
@@ -110,11 +109,11 @@ background-color:#7a9eff;
 -moz-border-radius-bottomright: 9px;
 }
 
-#menunavigazione .menu3 a{
+#menu .menu3 a{
 border-top:6px solid #4f5bff;
 }
 
-#menunavigazione .menu3 a:hover{
+#menu .menu3 a:hover{
 color:#FFF;
 background-color:#4f5bff;
 -webkit-border-bottom-left-radius: 9px;
@@ -123,11 +122,11 @@ background-color:#4f5bff;
 -moz-border-radius-bottomright: 9px;
 }
 
-#menunavigazione .menu4 a{
+#menu .menu4 a{
 border-top:6px solid #2D46CE;
 }
 
-#menunavigazione .menu4 a:hover{
+#menu .menu4 a:hover{
 color:#FFF;
 background-color:#2D46CE;
 -webkit-border-bottom-left-radius: 9px;
@@ -136,11 +135,11 @@ background-color:#2D46CE;
 -moz-border-radius-bottomright: 9px;
 }
 
-#menunavigazione .menu5 a{
+#menu .menu5 a{
 border-top:6px solid #2D46CE;
 }
 
-#menunavigazione .menu5 a:hover{
+#menu .menu5 a:hover{
 color:#FFF;
 background-color:#2D46CE;
 -webkit-border-bottom-left-radius: 9px;
@@ -149,26 +148,67 @@ background-color:#2D46CE;
 -moz-border-radius-bottomright: 9px;
 }
 
-#formregistrazione{
-font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
-width:600px;
+#menu .selected1 a{
+color:#FFF;
+background-color:#6bb8ff;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#menu .selected2 a{
+color:#FFF;
+background-color:#7a9eff;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#menu .selected3 a{
+color:#FFF;
+background-color:#4f5bff;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#menu .selected4 a{
+color:#FFF;
+background-color:#2d46ce;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
 }
 
 td{
 font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
 font-size:10pt;
-padding:5px;
+}
+
+#login td{
+padding:0px 5px 5px 5px;
 }
 
 .inputtextform{
 border:1px solid #bbbbbb;
-padding:8px;
+padding:5px;
 border-radius: 5px;
-width:200px;
+width:120px;
 }
 
-.submitbutton{
-width:100px;
+#sign_up{
+margin-top:15px;
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+}
+
+#sign_up a{
+text-decoration:none;
+color:#6bb8ff;
 }
 
 /* Notifiche JAVASCRIPT */
@@ -178,57 +218,62 @@ color:red;
 display:none;
 }
 
-#stato_sessione{
-position:relative;
-left:600px;
+#login {
 font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
 font-size:10pt;
-padding:8px;
-width:150px;
 }
 
-#divsearch {
-width:400px;
-padding:10px;
-border-radius:5px;
-}
-
-#divsearch h2 {
-font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+#cerca_autore h2 {
 font-size:15pt;
 margin-bottom:20px;
 }
 
-#contenuto h2 {
-font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+#risultati_ricerca h2 {
 font-size:15pt;
 margin-bottom:20px;
+margin-top:20px;
 }
 
-#contenuto {
-width:800px;
-height:400px;
-float:left;
-margin-top:30px;
-padding:10px;
-border-top:1px solid #bbb;
-}
-
-#contenuto li {
+#risultati_ricerca li {
 font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
 font-size:10pt;
 padding:3px;
 }
 
-#contenuto a{
+#risultati_ricerca a{
 text-decoration:none;
 color:#000;
 border-radius:3px;
 padding:3px;
 }
 
-#contenuto li a:hover {
+#risultati_ricerca li a:hover {
 background-color:#4194f0;
 color:#fff;
 }
 
+#dati_vecchi{
+border:1px solid #bbb;
+border-radius:5px;
+padding:5px;
+margin-bottom:20px;
+}
+
+#dati_vecchi td{
+padding:5px;
+}
+
+#dati_nuovi td{
+padding:5px;
+}
+
+#dati_profilo{
+border:1px solid #bbb;
+border-radius:5px;
+padding:5px;
+margin-bottom:20px;
+}
+
+#dati_profilo td{
+padding:5px;
+}

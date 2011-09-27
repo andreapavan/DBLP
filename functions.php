@@ -1,5 +1,5 @@
 <?php
-$connetti=mysql_connect('localhost','root','root');
+$connetti=mysql_connect('localhost','root','andreapavan1989');
 
 /*  --------------------------------------------
 	FUNZIONE DI REGISTRAZIONE DELL'UTENTE NEL DB
@@ -16,21 +16,8 @@ function insertUser() {
 	global $connetti;
 	$sql="INSERT INTO progetto.utenti SET nome='$nome',cognome='$cognome',email='$email',password='$password_cript',username='$username'";
 	$query=mysql_query($sql,$connetti);
-	$message="
-	<html>
-		<body>
-			<p>Benvenuto, $nome $cognome. Grazie per esserti registrato.</p>
-			<p>I tuoi dati di registrazione:</p>
-			<p>E-mail: $email</p>
-			<p>Username: $username</p>
-			<p>Password: $password</p>
-			<p></p>
-		</body>
-	</html>
-	";
-	$headers = 'from: Andrea Pavan <andreapavan89@gmail.com>'."\r\n";
-	$headers .= 'MIME-Version: 1.0' . "\r\n";
-	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$message="Benvenuto, $nome $cognome. Grazie per esserti registrato.\n\nE-mail: $email\nUsername: $username\nPassword: $password";
+	$headers="From: andreapavan89@gmail.com";
 	mail($email,"Benvenuto in DBLP Bibliography",$message,$headers);
 }
 
@@ -46,7 +33,7 @@ function insertUser() {
 function checkUser($username,$password) {
 	global $connetti;
 	$password=md5($password);
-	$sql_read = "SELECT nome,cognome FROM progetto.utenti WHERE username='$username'&&password='$password'";
+	$sql_read = "SELECT nome,cognome FROM progetto.utenti WHERE username='$username' AND password='$password'";
 	$query2=mysql_query($sql_read,$connetti);
 	$array_result=mysql_fetch_row($query2);
 	if ($array_result[0]==NULL) {
@@ -83,9 +70,9 @@ function isUniqueEmail($email) {
 	------------------------------------------------
 */
 
-function recoverInfo ($username) {
+function getUserData($username) {
 	global $connetti;
-	$sql_info = "SELECT nome,cognome,username id FROM progetto.utenti WHERE username='$username'";
+	$sql_info = "SELECT nome,cognome,username,email,id FROM progetto.utenti WHERE username='$username'";
 	$query4=mysql_query($sql_info,$connetti);
 	$array_result=mysql_fetch_row($query4);
 	return $array_result;
@@ -119,5 +106,32 @@ function checkLogSession() {
 		echo "Benvenuto, visitatore.";
 	}
 }
+
+function loginUser($username) {
+	session_start();
+	$_SESSION["user"]=$username;
+}
+
+function checkSession() {
+	session_start();
+	if (isset($_SESSION["user"])) {
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function curPageURL() {
+	$pageURL = 'http';
+	if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+	$pageURL .= "://";
+	if ($_SERVER["SERVER_PORT"] != "80") {
+		$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+	} else {
+		$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	}
+	return $pageURL;
+}
+
 ?>
 

@@ -21,25 +21,17 @@
 				<?php include("sidebar.php");?>
 			</div>
 			<div id="menu">
-				<span class="menu1 selected1"><a href="index.php">Home</a></span>
-				<?php 
+				<span class="menu1"><a href="index.php">Home</a></span>
+				<?php
 				session_start();
 				if (isset($_SESSION["user"])) {?>
 				<span class="menu2"><a href="myprofile.php">My Profile</a></span>
 				<span class="menu3"><a href="cerca.php">Cerca</a></span>
-				<span class="menu4"><a href="pubblica.php">Pubblica</a></span>
+				<span class="menu4 selected4"><a href="pubblica.php">Pubblica</a></span>
 				<?php } ?>
 			</div>
 			<div id="content">
-				<p>Benvenuti nella bibliografia del dipartimento di informatica.</p>
-				<?php 
-				if ((isset($_POST["button-confirm"]))&&(isUniqueEmail($_POST["email"]))){
-					echo "<p>Complimenti, registrazione effettuata con successo.</p>";
-					insertUser();
-				}else{
-					echo "<p>Indirizzo email gi&agrave utilizzato</p>";
-				}
-				?>
+				<?php include("content.php"); ?>
 			</div>
 		</div>
 	</body>
