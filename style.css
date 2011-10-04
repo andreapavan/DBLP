@@ -136,12 +136,12 @@ background-color:#2D46CE;
 }
 
 #menu .menu5 a{
-border-top:6px solid #2D46CE;
+border-top:6px solid #000;
 }
 
 #menu .menu5 a:hover{
 color:#FFF;
-background-color:#2D46CE;
+background-color:#000;
 -webkit-border-bottom-left-radius: 9px;
 -webkit-border-bottom-right-radius: 9px;
 -moz-border-radius-bottomleft: 9px;
@@ -178,6 +178,15 @@ background-color:#4f5bff;
 #menu .selected4 a{
 color:#FFF;
 background-color:#2d46ce;
+-webkit-border-bottom-left-radius: 9px;
+-webkit-border-bottom-right-radius: 9px;
+-moz-border-radius-bottomleft: 9px;
+-moz-border-radius-bottomright: 9px;
+}
+
+#menu .selected5 a{
+color:#FFF;
+background-color:#000;
 -webkit-border-bottom-left-radius: 9px;
 -webkit-border-bottom-right-radius: 9px;
 -moz-border-radius-bottomleft: 9px;
@@ -276,4 +285,17 @@ margin-bottom:20px;
 
 #dati_profilo td{
 padding:5px;
+}
+
+#tabella_utenti th {
+padding-bottom:20px;
+}
+
+#tabella_utenti td {
+width:100px;
+padding-bottom:5px;
+}
+
+#form_delete {
+visibility:hidden;
 }

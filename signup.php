@@ -18,9 +18,6 @@
 		<div id="wrapper">
 			<div id="menu">
 				<span class="menu1"><a href="index.php">Home</a></span>
-				<span class="menu2"><a href="myprofile.php">My Profile</a></span>
-				<span class="menu3"><a href="cerca.php">Cerca</a></span>
-				<span class="menu4"><a href="pubblica.php">Pubblica</a></span>
 			</div>
 			<div id="content">
 				<h1>Registrazione</h1>

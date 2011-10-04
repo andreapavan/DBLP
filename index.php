@@ -28,18 +28,14 @@
 				<span class="menu2"><a href="myprofile.php">My Profile</a></span>
 				<span class="menu3"><a href="cerca.php">Cerca</a></span>
 				<span class="menu4"><a href="pubblica.php">Pubblica</a></span>
-				<?php } ?>
+				<?php }
+				if ($_SESSION["user"]=="admin") {?>
+				<span class="menu5"><a href="listautenti.php">Lista Utenti</a></span>
+				<?php } 
+				?>
 			</div>
 			<div id="content">
-				<p>Benvenuti nella bibliografia del dipartimento di informatica.</p>
-				<?php 
-				if ((isset($_POST["button-confirm"]))&&(isUniqueEmail($_POST["email"]))){
-					echo "<p>Complimenti, registrazione effettuata con successo.</p>";
-					insertUser();
-				}else{
-					echo "<p>Indirizzo email gi&agrave utilizzato</p>";
-				}
-				?>
+				<?php include("content.php");?>
 			</div>
 		</div>
 	</body>

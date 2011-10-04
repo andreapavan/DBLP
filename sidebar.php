@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST["button-logout"])) {
-	session_start();
-	session_destroy();
+	logout();
 }
 if (isset($_POST["button-login"])) {
 	if (checkUser($_POST["username"],$_POST["password"])) {

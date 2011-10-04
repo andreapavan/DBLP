@@ -1,9 +1,9 @@
 <?php
 $connetti=mysql_connect('localhost','root','andreapavan1989');
 
-/*  --------------------------------------------
-	FUNZIONE DI REGISTRAZIONE DELL'UTENTE NEL DB
-	--------------------------------------------
+/*  ----------------------------------
+	REGISTRAZIONE NUOVO UTENTE NEL DB
+	----------------------------------
 */
 
 function insertUser() {
@@ -48,8 +48,8 @@ function checkUser($username,$password) {
 	
 	*	La funzione isUniqueEmail controlla se la mail è già
 		stata utilizzata per la registrazione di un altro
-		utente. Ritorna pertanto un valore booleano TRUE se
-		l'indirizzo non è mai stato utilizzato.
+		utente. Ritorna TRUE se l'indirizzo non è mai stato
+		utilizzato.
 	--------------------------------------------------------
 */
 
@@ -65,46 +65,49 @@ function isUniqueEmail($email) {
 	}
 }
 
-/*  ------------------------------------------------
-	FUNZIONE RECUPERO INFORMAZIONI UTENTE REGISTRATO
-	------------------------------------------------
+/*  --------------------------------------
+	FUNZIONE RECUPERO INFORMAZIONI UTENTE 
+	--------------------------------------
 */
 
 function getUserData($username) {
 	global $connetti;
-	$sql_info = "SELECT nome,cognome,username,email,id FROM progetto.utenti WHERE username='$username'";
+	$sql_info="SELECT nome,cognome,username,email,id FROM progetto.utenti WHERE username='$username'";
 	$query4=mysql_query($sql_info,$connetti);
 	$array_result=mysql_fetch_row($query4);
 	return $array_result;
 }
 
-/*
-	----------------------------------
-	LOGIN, LOGOUT E CONTROLLO SESSIONE
-	----------------------------------
+/*  ---------------------
+	MODIFICA DATI UTENTE
+	---------------------
 */
 
-function checkLogSession() {
-	if (isset($_POST["button-logout"])){
-		session_start();
-		session_destroy();
-	}
-	if (isset($_POST["button-login"])){
-		$username=$_POST["username"];
-		$password=$_POST["password"];
-		if (checkUser($username,$password)){
-			session_start();
-			$_SESSION["user"]=$username;
-		}else{
-			echo "Dati errati";
-		}
-	}
+function modifyUserData($user) {
+	global $connetti;
+	$nuovo_nome=$_POST["nuovo_nome"];
+	$nuovo_cognome=$_POST["nuovo_cognome"];
+	$nuovo_username=$_POST["nuovo_username"];
+	$nuova_email=$_POST["nuovo_email"];
+	$sql_modify="UPDATE progetto.utenti SET username='$nuovo_nome',nome='$nuovo_nome',cognome='$nuovo_cognome',email='$nuova_email' WHERE username='$user'";
+	$query=mysql_query($sql_modify,$connetti);
+}
+
+function cancellaAccount($id) {
+	global $connetti;
+	$sql_delete="DELETE FROM progetto.utenti WHERE id='$id'";
+	$query=mysql_query($sql_delete,$connetti);
+}
+
+/*
+	-------------------
+	CONTROLLI SESSIONE
+	-------------------
+*/
+
+function logout() {
 	session_start();
-	if (isset($_SESSION["user"])){
-		echo "Benvenuto, ".$_SESSION["user"];
-	}else{
-		echo "Benvenuto, visitatore.";
-	}
+	session_destroy();
 }
 
 function loginUser($username) {
@@ -120,6 +123,12 @@ function checkSession() {
 		return false;
 	}
 }
+
+/*
+	-------------
+	URL CORRENTE
+	-------------
+*/
 
 function curPageURL() {
 	$pageURL = 'http';

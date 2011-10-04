@@ -1,4 +1,4 @@
-<?php if(curPageURL()=="http://46.137.24.65/myprofile.php") { ?>
+<?php if(curPageURL()=="http://46.137.24.65/myprofile.php" && isset($_SESSION["user"])) { ?>
 	<?php
 		if (!checkSession()) {
 			echo "<h1>Dati Errati, non sei loggato.</h1>";
@@ -43,8 +43,8 @@
 								<td><input class="inputtextform" type="text" name="nuovo_email"/></td>
 							</tr>
 						</table>
-						<input type="submit" name="buttone_conferma_modifica" value="Conferma Modifiche"/>
-						<input type="submit" name="buttone_annulla_modifica" value="Annulla Modifiche"/>
+						<input type="submit" name="bottone_conferma_modifica" value="Conferma Modifiche"/>
+						<input type="button" name="bottone_annulla_modifica" value="Annulla Modifiche"/>
 					</form>
 				</div>
 			<?php }else{ ?>
@@ -79,42 +79,92 @@
 				</div>
 			<?php } ?>
 	<?php } ?>
-<?php } else if (curPageURL()=="http://46.137.24.65/cerca.php") { ?>
+<?php } else if (curPageURL()=="http://46.137.24.65/cerca.php" && isset($_SESSION["user"])) { ?>
 	<div id="cerca_autore">
-			<h2>Ricerca Autore</h2>
-			<form method="post" id="search" action="cerca.php">
-				<input type="text" class="inputtextform" name="search"/>
-				<input type="submit" value="Search" class="submitbutton" name="submit-button-search" id="submit-search"/>
-			</form>
+		<h2>Ricerca Autore</h2>
+		<form method="post" id="search" action="cerca.php">
+			<input type="text" class="inputtextform" name="search"/>
+			<input type="submit" value="Search" class="submitbutton" name="submit-button-search" id="submit-search"/>
+		</form>
 	</div>
 	<div id="risultati_ricerca">
 		<?php
 			if (isset($_POST["submit-button-search"])) {
 				echo ("<h2>Risultati ricerca per: ".$_POST["search"]."</h2>");
-			}
 			$url="http://dblp.uni-trier.de/search/author?xauthor=";
 			$author_search=$_POST["search"];
-			//$a=explode(" ",$author_search);
-			//print_r($a);
-			//$author=$a[0]."$ ".$a[1]."$";
-			//echo ($author);
 			$url=$url.$author_search;
 			$array_xml=simplexml_load_file($url);
-			//print_r($array_xml);
-			//echo (count($b));
+			}
 			if ($author_search!="") {
 				for ($i=0;$i<100;$i++) {
 					$attr=$array_xml->author->$i->attributes();
-					//print_r($attr);
 					echo ("<li><a href="."http://dblp.uni-trier.de/rec/pers/".$attr["urlpt"]."/k>".$array_xml->author->$i."</a></li>");
 				}
 			}
 		?>
 	</div>
-<?php } else if (curPageURL()=="http://46.137.24.65/pubblica.php") { ?>
+<?php } else if (curPageURL()=="http://46.137.24.65/pubblica.php" && isset($_SESSION["user"])) { ?>
 
 	<?php echo "siamo in pubblica"; ?>
 
+<?php } else if (curPageURL()=="http://46.137.24.65/listautenti.php" && isset($_SESSION["user"])) { ?>
+
+	<?php
+		if (isset($_POST["button-delete"])) {
+			cancellaAccount($_POST["user-id"]);
+		}
+	?>
+
+	<table id="tabella_utenti">
+		<thead>
+			<tr><th>Username</th><th>Nome</th><th>Cognome</th><th>Email</th></tr>
+		</thead>
+		<tbody>
+		<?php
+		$connetti=mysql_connect('localhost','root','andreapavan1989');
+		$sql="SELECT username,nome,cognome,email,id FROM progetto.utenti";
+		$query= mysql_query($sql, $connetti);
+		while ($values=mysql_fetch_array($query)) {
+			$username=$values["username"];
+			$nome=$values["nome"];
+			$cognome=$values["cognome"];
+			$email=$values["email"];
+			$id=$values["id"];
+		?>	
+		<tr>
+		<td><?php echo $username; ?></td>
+		<td><?php echo $nome; ?></td>
+		<td><?php echo $cognome; ?></td>
+		<td><?php echo $email; ?></td>
+		<td>
+			<input type="image" src="button_delete.gif" width="20" height="20"id="delete_<?php echo $id; ?>" onclick="deleteAccount(<?php echo $id;?>);"/>
+		</td>
+		</tr>
+		<?php } ?>
+		</tbody>
+	</table>
+	
+	<form id="form_delete" method="post">
+		<input type="hidden" name="user-id" id="user-id" value=""/>
+		<input type="submit" name="button-delete" value="" id="button-delete"/>
+	</form>
+
+<?php } else if (curPageURL()=="http://46.137.24.65/index.php"||curPageURL()=="http://46.137.24.65") { ?>
+	<p>Benvenuti nella bibliografia del dipartimento di informatica</p>
+	
+	<?php
+	if (isset($_POST["button-confirm"])) {
+		if (isUniqueEmail($_POST["email"])) {
+			insertUser();
+			echo "<p>Complimenti, registrazione effettuata con successo.</p>";
+		}else{
+			echo "<p>Indirizzo email gi&agrave utilizzato</p>";
+		}
+	}
+	?>
+<?php } else { ?>
+	<h1><font color="red">ATTENZIONE! Devi loggarti per accedere al contenuto.</font></h1>
 <?php } ?>
 
 
