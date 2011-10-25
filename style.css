@@ -198,8 +198,10 @@ font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
 font-size:10pt;
 }
 
-#login td{
-padding:0px 5px 5px 5px;
+
+#login {
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
 }
 
 .inputtextform{
@@ -215,9 +217,22 @@ font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
 font-size:10pt;
 }
 
+#sign_up p{
+margin-bottom: 20px;
+}
+
 #sign_up a{
 text-decoration:none;
-color:#6bb8ff;
+color:#fff;
+padding:10px;
+border-radius:5px;
+background-color:#4194f0;
+}
+
+#sign_up a:hover{
+color:#4194f0;
+background-color:#fff;
+border:1px solid #4194f0;
 }
 
 /* Notifiche JAVASCRIPT */
@@ -227,9 +242,12 @@ color:red;
 display:none;
 }
 
-#login {
-font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
-font-size:10pt;
+#form-login {
+text-align:center;
+}
+
+#username-password-login {
+margin-bottom: 5px;
 }
 
 #cerca_autore h2 {
@@ -287,15 +305,32 @@ margin-bottom:20px;
 padding:5px;
 }
 
-#tabella_utenti th {
+#tabella_ricerche, #tabella_utenti {
+text-align:center;
+}
+
+#tabella_utenti th{
 padding-bottom:20px;
 }
 
-#tabella_utenti td {
+#tabella_utenti td{
+width:100px;
+padding-bottom:5px;
+}
+
+#tabella_ricerche th{
+padding-bottom:20px;
+}
+
+#tabella_ricerche td{
 width:100px;
 padding-bottom:5px;
 }
 
 #form_delete {
 visibility:hidden;
+}
+
+#search-form td{
+padding-top:10px;
 }

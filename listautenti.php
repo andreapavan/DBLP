@@ -27,7 +27,7 @@
 				if (isset($_SESSION["user"])) {?>
 				<span class="menu2"><a href="myprofile.php">My Profile</a></span>
 				<span class="menu3"><a href="cerca.php">Cerca</a></span>
-				<span class="menu4"><a href="pubblica.php">Pubblica</a></span>
+				<span class="menu4"><a href="history.php">History</a></span>
 				<?php }
 				if ($_SESSION["user"]=="admin") {?>
 				<span class="menu5 selected5"><a href="listautenti.php">Lista Utenti</a></span>

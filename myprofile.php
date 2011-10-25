@@ -27,7 +27,7 @@
 				if (isset($_SESSION["user"])) {?>
 				<span class="menu2 selected2"><a href="myprofile.php">My Profile</a></span>
 				<span class="menu3"><a href="cerca.php">Cerca</a></span>
-				<span class="menu4"><a href="pubblica.php">Pubblica</a></span>
+				<span class="menu4"><a href="history.php">History</a></span>
 				<?php }
 				if ($_SESSION["user"]=="admin") {?>
 				<span class="menu5"><a href="listautenti.php">Lista Utenti</a></span>
@@ -40,3 +40,18 @@
 		</div>
 	</body>
 </html>
+
+<script language="javascript">
+
+	function deleteAccount(id) {
+		var x=confirm("Sei sicuro di voler cancellare l'account?");
+		if (x==true) {
+			alert("Account cancellato");
+			document.getElementById("user-id").value=id;
+			document.getElementById("button-delete").click();
+		}else{
+			alert("Operazione annullata");
+		}	
+	}
+
+</script>

@@ -72,7 +72,7 @@ function isUniqueEmail($email) {
 
 function getUserData($username) {
 	global $connetti;
-	$sql_info="SELECT nome,cognome,username,email,id FROM progetto.utenti WHERE username='$username'";
+	$sql_info="SELECT nome,cognome,username,email FROM progetto.utenti WHERE username='$username'";
 	$query4=mysql_query($sql_info,$connetti);
 	$array_result=mysql_fetch_row($query4);
 	return $array_result;
@@ -142,5 +142,17 @@ function curPageURL() {
 	return $pageURL;
 }
 
+function saveSearch($username,$author,$data,$ora) {
+	global $connetti;
+	$sql="INSERT INTO progetto.ricerche SET username='$username',autore='$author',data='$data',ora='$ora'";
+	$query=mysql_query($sql,$connetti);
+}
+
+function deleteHistory($username) {
+	global $connetti;
+	$sql_delete="DELETE FROM progetto.ricerche WHERE username='$username'";
+	$query=mysql_query($sql_delete,$connetti);
+	
+}
 ?>
 
