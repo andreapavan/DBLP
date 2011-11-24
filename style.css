@@ -5,7 +5,7 @@ padding:0;
 
 @font-face {
 font-family: 'GillSansMT';
-src: local('Gill Sans MT'), url('Gill Sans MT.ttf') format('truetype');
+src: local('Gill Sans MT'), url('font/Gill Sans MT.ttf') format('truetype');
 }
 
 body{
@@ -77,8 +77,8 @@ height:50px;
 
 #menu a{
 font-family: "Trebuchet MS","Helvetica", "Arial", sans-serif;
-padding:6px 20px 9px 20px;
-font-size:13pt;
+padding:5px 11px 11px 11px;
+font-size:11pt;
 color:#000;
 text-decoration:none;
 }
@@ -204,6 +204,13 @@ font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
 font-size:10pt;
 }
 
+.textform {
+border:1px solid #bbbbbb;
+padding:10px;
+border-radius: 5px;
+width:200px;
+}
+
 .inputtextform{
 border:1px solid #bbbbbb;
 padding:5px;
@@ -255,26 +262,27 @@ font-size:15pt;
 margin-bottom:20px;
 }
 
-#risultati_ricerca h2 {
+#lista_file h1 {
 font-size:15pt;
 margin-bottom:20px;
 margin-top:20px;
 }
 
-#risultati_ricerca li {
-font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
-font-size:10pt;
-padding:3px;
+#lista_file p{
+padding:5px;
+width:300px;
 }
 
-#risultati_ricerca a{
+#lista_file a{
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
 text-decoration:none;
 color:#000;
 border-radius:3px;
 padding:3px;
 }
 
-#risultati_ricerca li a:hover {
+#lista_file a:hover {
 background-color:#4194f0;
 color:#fff;
 }
@@ -327,10 +335,153 @@ width:100px;
 padding-bottom:5px;
 }
 
-#form_delete {
+#form_delete{
 visibility:hidden;
+}
+
+#search-form{
+width:350px;
 }
 
 #search-form td{
 padding-top:10px;
+}
+
+#add_remove_author {
+width:25px;
+height:25px;
+padding:3px;
+margin-left:10px;
+color:#fff;
+border-radius:5px;
+border:1px solid #4194f0;
+background-color:#4194f0;
+font-family:"Arial",sans-serif;
+font-size:12pt;
+}
+
+#add_remove_author:hover {
+width:25px;
+height:25px;
+padding:3px;
+margin-left:10px;
+color:#4194f0;
+border-radius:5px;
+border:1px solid #4194f0;
+background-color:#fff;
+font-family:"Arial",sans-serif;
+font-size:12pt;
+}
+
+#submit-search{
+margin-top:20px;
+color:#fff;
+padding:10px;
+border-radius:5px;
+border:1px solid #4194f0;
+background-color:#4194f0;
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+}
+
+#submit-search:hover{
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+color:#4194f0;
+background-color:#fff;
+border:1px solid #4194f0;
+}
+
+#author_1, #author_2, #author_3, #author_4 {
+display:none;
+}
+
+body h1{
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+}
+
+#table_pubblications{
+margin-top:10px;
+border:1px solid #bbb;
+border-radius:10px;
+}
+
+#table_pubblications thead{
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:12pt;
+padding:5px;
+}
+
+#table_pubblications td{
+padding:3px;
+}
+
+#td_author{
+width:500px;
+}
+
+#td_booktitle, #td_year, #td_pages, #td_ee{
+width:150px;
+text-align:center;
+}
+
+#td_crossref{
+width:200px;
+text-align:center;
+}
+
+#td_name {
+font-weight: bold;
+}
+
+#td_value {
+width:200px;
+}
+
+#conferma_ricerca {
+width:280px;
+height:70px;
+border:2px solid #2D971F;
+border-radius: 10px;
+background-color: #83EB75;
+}
+
+#errore_ricerca {
+width:280px;
+height:70px;
+border:2px solid #D31515;
+border-radius: 10px;
+background-color: #EC7171;
+}
+
+#conferma_ricerca p,#errore_ricerca p{
+margin-top:10px;
+}
+
+#confirm_img, #error_img{
+float:left;
+padding:10px;
+}
+
+#conversion{
+margin-top:10px;
+}
+
+#labelText{
+padding-top: 10px;
+width:80px;
+float:left;
+text-align: center;
+}
+
+.formContent{
+padding:5px;
+}
+
+#select-conversion{
+text-align: center;
+}
+
+#only_these_author {
+display:none;
 }

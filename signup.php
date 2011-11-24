@@ -12,7 +12,7 @@
 				<p>Computer Science Bibliography</p>
 			</div>
 			<div id="logo_uniud">
-				<a href="http://www.uniud.it"><img src="logo_uniud.gif" alt="UNIUD"/></a>
+				<a href="http://www.uniud.it"><img src="img/logo_uniud.gif" alt="UNIUD"/></a>
 			</div>
 		</div>
 		<div id="wrapper">
