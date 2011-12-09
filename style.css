@@ -69,6 +69,8 @@ padding-bottom:50px;
 float:right;
 }
 
+/*********************** GRAFICA MENU ***********************/
+
 #menu{
 margin-bottom:10px;
 width:530px;
@@ -192,6 +194,8 @@ background-color:#000;
 -moz-border-radius-bottomleft: 9px;
 -moz-border-radius-bottomright: 9px;
 }
+
+/*********************** TABELLA ***********************/
 
 td{
 font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
@@ -373,6 +377,38 @@ font-family:"Arial",sans-serif;
 font-size:12pt;
 }
 
+/*********************** TASTO CONFERMA SIGNUP ***********************/
+
+.confirmed {
+margin-top:20px;
+color:#fff;
+padding:10px;
+border-radius:5px;
+border:1px solid #4194f0;
+background-color:#4194f0;
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+}
+
+.confirmed:hover {
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+color:#4194f0;
+background-color:#fff;
+border:1px solid #4194f0;
+}
+
+.warning {
+margin-top:20px;
+color:#fff;
+padding:10px;
+border-radius:5px;
+border:1px solid #EB1B1B;
+background-color:#EB1B1B;
+font-family:"Trebuchet MS","Helevtica","Arial",sans-serif;
+font-size:10pt;
+}
+
 #submit-search{
 margin-top:20px;
 color:#fff;
@@ -484,4 +520,49 @@ text-align: center;
 
 #only_these_author {
 display:none;
+}
+
+#fade { /*--Transparent background layer--*/
+	display: none; /*--hidden by default--*/
+	background: #000;
+	position: fixed; left: 0; top: 0;
+	width: 100%; height: 100%;
+	opacity: .80;
+	z-index: 9999;
+}
+.popup_block{
+	display: none; /*--hidden by default--*/
+	background: #fff;
+	padding: 20px;
+	border: 20px solid #ddd;
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%; left: 50%;
+	z-index: 99999;
+	/*--CSS3 Box Shadows--*/
+	-webkit-box-shadow: 0px 0px 20px #000;
+	-moz-box-shadow: 0px 0px 20px #000;
+	box-shadow: 0px 0px 20px #000;
+	/*--CSS3 Rounded Corners--*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+img.btn_close {
+	float: right;
+	margin: -55px -55px 0 0;
+}
+/*--Making IE6 Understand Fixed Positioning--*/
+*html #fade {
+	position: absolute;
+}
+*html .popup_block {
+	position: absolute;
+}
+#popup_delete {
+	font-family:"GillSansMT","Helvetica","Arial",sans-serif;
+}
+#new_password1, #new_password2 {
+	display:none;
 }

@@ -83,20 +83,63 @@ function getUserData($username) {
 	---------------------
 */
 
-function modifyUserData($user) {
+function modifyUserData() {
 	global $connetti;
+	$currentUser=$_SESSION["user"];
+	$sqlGetId="SELECT id FROM progetto.utenti WHERE username='$currentUser'";
+	$result=mysql_query($sqlGetId,$connetti);
+	$id=mysql_fetch_row($result);
 	$nuovo_nome=$_POST["nuovo_nome"];
 	$nuovo_cognome=$_POST["nuovo_cognome"];
 	$nuovo_username=$_POST["nuovo_username"];
-	$nuova_email=$_POST["nuovo_email"];
-	$sql_modify="UPDATE progetto.utenti SET username='$nuovo_nome',nome='$nuovo_nome',cognome='$nuovo_cognome',email='$nuova_email' WHERE username='$user'";
+	$nuovo_email=$_POST["nuovo_email"];
+	$nuovo_password=$_POST["nuovo_password"];
+	$nuovo_confirm_password=$_POST["nuovo_confirm_password"];
+	if ($nuovo_password==$nuovo_confirm_password && $nuovo_password!='' && $nuovo_confirm_password!='') {
+		$psw=md5($nuovo_password);
+		$sql_modify="UPDATE progetto.utenti SET username='$nuovo_username',nome='$nuovo_nome',cognome='$nuovo_cognome',email='$nuovo_email', password='$psw' WHERE id='$id[0]'";
+	}else{
+		$sql_modify="UPDATE progetto.utenti SET username='$nuovo_username',nome='$nuovo_nome',cognome='$nuovo_cognome',email='$nuovo_email' WHERE id='$id[0]'";
+	}
 	$query=mysql_query($sql_modify,$connetti);
+	$message="Benvenuto, $nuovo_nome $nuovo_cognome. Hai deciso di cambaire i tuoi dati personali.\n\nNome: $nuovo_nome\nCognome: $nuovo_cognome\nE-mail: $nuova_email\nUsername: $nuovo_username\n";
+	$headers="From: andreapavan89@gmail.com";
+	mail($nuova_email,"Modica dati personali in DBLP Bibliography",$message,$headers);
+	logout();
+	header("Location: index.php");
+
 }
 
 function cancellaAccount($id) {
 	global $connetti;
+	$queryUsername="SELECT username FROM  progetto.utenti WHERE id='$id'";
+	$result=mysql_query($queryUsername,$connetti);
+	$username=mysql_fetch_row($result);
+	if ($username) {
+		$path="utenti/".$username[0];
+		
+	}else{
+		echo $username[0];
+		echo "Errore SQL";
+	}
+	deleteHistory($username[0]);
+	deleteUserFiles($path);
 	$sql_delete="DELETE FROM progetto.utenti WHERE id='$id'";
 	$query=mysql_query($sql_delete,$connetti);
+}
+
+function deleteUserFiles($path) {
+    if (is_dir($path) === true) {
+        $files = array_diff(scandir($path), array('.', '..'));
+        foreach ($files as $file) {
+            deleteUserFiles(realpath($path) . '/' . $file);
+        }
+        return rmdir($path);
+    }
+    else if (is_file($path) === true) {
+	    return unlink($path);
+    }
+    return false;
 }
 
 /*
@@ -141,6 +184,13 @@ function curPageURL() {
 	}
 	return $pageURL;
 }
+
+/*
+	----------------
+	HISTORY FUNCTION
+	----------------
+
+*/
 
 function saveSearch($username,$author,$data,$ora) {
 	global $connetti;

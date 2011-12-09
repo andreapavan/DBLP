@@ -128,7 +128,7 @@
 						    </select>
 						</div>
 						
-						<input type="submit" value="SEARCH" name="submit-search" id="submit-search"/>
+						<input type="submit" value="SEARCH" name="submit-search" id="submit-search" onclick="bloccaRicerche();"/>
 					</form>
 				<?php
 			}else{
@@ -141,6 +141,11 @@
 </html>
 
 <script>
+
+function bloccaRicerche() {
+		$('#submit-search').hide();
+}
+
 var i=1;
 function addAuthor() {
 	document.getElementById('exact_match').style.display='none';

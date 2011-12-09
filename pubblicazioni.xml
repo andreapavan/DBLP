@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<dblp><inproceedings key="conf/iswsa/AnticoliT11" mdate="2011-07-11">
+<author>Linda Anticoli</author>
+<author>Elio Toppano</author>
+<title>The role of culture in collaborative ontology design.</title>
+<pages>4</pages>
+<year>2011</year>
+<booktitle>ISWSA</booktitle>
+<ee>http://doi.acm.org/10.1145/1980822.1980826</ee>
+<crossref>conf/iswsa/2011</crossref>
+<url>db/conf/iswsa/iswsa2011.html#AnticoliT11</url>
+</inproceedings><article key="journals/ijitwe/AnticoliT11" mdate="2011-07-12">
+<author>Linda Anticoli</author>
+<author>Elio Toppano</author>
+<title>How Culture May Influence Ontology Co-Design: A Qualitative Study.</title>
+<pages>1-17</pages>
+<year>2011</year>
+<volume>6</volume>
+<journal>IJITWE</journal>
+<number>2</number>
+<ee>http://dx.doi.org/10.4018/jitwe.2011040101</ee>
+<url>db/journals/ijitwe/ijitwe6.html#AnticoliT11</url>
+</article><inproceedings key="conf/iswsa/Toppano10" mdate="2011-07-11">
+<author>Elio Toppano</author>
+<title>A communication-based model of ontology design and (re)use.</title>
+<pages>6</pages>
+<year>2010</year>
+<booktitle>ISWSA</booktitle>
+<ee>http://doi.acm.org/10.1145/1874590.1874596</ee>
+<crossref>conf/iswsa/2010</crossref>
+<url>db/conf/iswsa/iswsa2010.html#Toppano10</url>
+</inproceedings><inproceedings key="conf/ht/ToppanoR09" mdate="2009-07-01">
+<author>Elio Toppano</author>
+<author>Vito Roberto</author>
+<title>Semiotic design and analysis of hypermedia.</title>
+<pages>367-368</pages>
+<year>2009</year>
+<booktitle>Hypertext</booktitle>
+<ee>http://doi.acm.org/10.1145/1557914.1557992</ee>
+<crossref>conf/ht/2009</crossref>
+<url>db/conf/ht/ht2009.html#ToppanoR09</url>
+</inproceedings><inproceedings key="conf/iciap/RobertoT09" mdate="2009-10-01">
+<author>Vito Roberto</author>
+<author>Elio Toppano</author>
+<title>Semiotic Design of a Hypermedia for Cultural Heritage.</title>
+<pages>425-433</pages>
+<year>2009</year>
+<booktitle>ICIAP</booktitle>
+<ee>http://dx.doi.org/10.1007/978-3-642-04146-4_46</ee>
+<crossref>conf/iciap/2009</crossref>
+<url>db/conf/iciap/iciap2009.html#RobertoT09</url>
+</inproceedings><article key="journals/ijmso/ToppanoRGB08" mdate="2009-09-09">
+<author>Elio Toppano</author>
+<author>Vito Roberto</author>
+<author>R. Giuffrida</author>
+<author>Giovanni Battista Buora</author>
+<title>Ontology engineering: reuse and integration.</title>
+<pages>233-247</pages>
+<year>2008</year>
+<volume>3</volume>
+<journal>IJMSO</journal>
+<number>3</number>
+<ee>http://dx.doi.org/10.1504/IJMSO.2008.023571</ee>
+<url>db/journals/ijmso/ijmso3.html#ToppanoRGB08</url>
+</article><inproceedings key="conf/ah/Toppano02" mdate="2002-06-04">
+<author>Elio Toppano</author>
+<title>Adaptation through Interaction Modelling in Educational Hypermedia.</title>
+<pages>576-579</pages>
+<year>2002</year>
+<crossref>conf/ah/2002</crossref>
+<booktitle>AH</booktitle>
+<ee>http://link.springer.de/link/service/series/0558/bibs/2347/23470576.htm</ee>
+<url>db/conf/ah/ah2002.html#Toppano02</url>
+</inproceedings><article key="journals/aai/Toppano96" mdate="2011-01-31">
+<author>Elio Toppano</author>
+<title>Rational Model Selection in Large Engineering Knowledge Bases.</title>
+<pages>191-224</pages>
+<year>1996</year>
+<volume>10</volume>
+<journal>Applied Artificial Intelligence</journal>
+<number>3</number>
+<ee>http://dx.doi.org/10.1080/088395196118551</ee>
+<url>db/journals/aai/aai10.html#Toppano96</url>
+</article><article key="journals/aai/ChittaroTT94" mdate="2011-01-31">
+<author>Luca Chittaro</author>
+<author>Carlo Tasso</author>
+<author>Elio Toppano</author>
+<title>Putting functional knowledge on firmer ground.</title>
+<pages>239-258</pages>
+<year>1994</year>
+<volume>8</volume>
+<journal>Applied Artificial Intelligence</journal>
+<number>2</number>
+<url>db/journals/aai/aai8.html#ChittaroTT94</url>
+<ee>http://dx.doi.org/10.1080/08839519408945441</ee>
+</article><inproceedings key="conf/aiia/BrajnikCGTT91" mdate="2011-06-14">
+<author>Giorgio Brajnik</author>
+<author>Luca Chiattro</author>
+<author>Giovanni Guida</author>
+<author>Carlo Tasso</author>
+<author>Elio Toppano</author>
+<title>Representation and Use of Teleological Knowledge in the Multi-Modeling Approach.</title>
+<pages>167-176</pages>
+<year>1991</year>
+<crossref>conf/aiia/1991</crossref>
+<booktitle>AI*IA</booktitle>
+<url>db/conf/aiia/aiia1991.html#BrajnikCGTT91</url>
+<ee>http://dx.doi.org/10.1007/3-540-54712-6_229</ee>
+</inproceedings></dblp>

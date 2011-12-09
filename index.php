@@ -24,7 +24,7 @@ session_start();
 			</div>
 			<div id="menu">
 				<span class="menu1 selected1"><a href="index.php">Home</a></span>
-				<?php 
+				<?php
 				if (isset($_SESSION["user"])) {?>
 				<span class="menu2"><a href="myprofile.php">My Profile</a></span>
 				<span class="menu3"><a href="cerca.php">Cerca</a></span>

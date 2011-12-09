@@ -18,6 +18,7 @@ if (isset($_POST["submit-search"])) {
 function searchPubblication() {
 $ricerca_autore=$_POST["input-author"];
 	if (isset($_POST["exact_match"])) {
+		$author0=$_POST["input-author"];
 		$ricerca=$_POST["input-author"];
 		if (strpos($ricerca," ")) {
 			$nome_autore=strstr($ricerca," ",true);
@@ -66,10 +67,11 @@ $ricerca_autore=$_POST["input-author"];
     
     $pubblicazioni-> saveXML();
     $count = $pubblicazioni -> childNodes -> item(0) -> childNodes -> length ;
-       
-    $queryFilter="";
-    
+     
     if ($count!=0) {
+
+    	$author0=ucwords($_POST["input-author"]);
+
 	    if (strlen($_POST["input-journal"])>0 && $_POST["input-journal"]!="") {
 	    	$journal=$_POST["input-journal"];
 	    	$queryFilter.="[contains(journal/.,\"".$journal."\")]";
@@ -90,114 +92,113 @@ $ricerca_autore=$_POST["input-author"];
 	    	$maxYear=$_POST["maxYear"];
 	    	$queryFilter.="[year<=$maxYear]";
 	    }
+
 	    if (strlen($_POST["input-author1"])>0 && $_POST["input-author1"]!="") {
-	    	$author1=$_POST["input-author1"];
-	    	$queryFilter.="";
+	    	$exactNumberOfAuthors=2;
+	    	echo "Settato Author 2, numero autori:".$exactNumberOfAuthors;
+	    	$author1=ucwords($_POST["input-author1"]);
+	    	$queryAuthor="[author/.=\"$author0\" or author/.=\"$author1\"]";
 	    }
 	    if (strlen($_POST["input-author2"])>0 && $_POST["input-author2"]!="") {
-	    	$author2=$_POST["input-author2"];
-	    	$queryFilter.="";
+	    	$exactNumberOfAuthors=3;
+	    	echo "Settato Author 3, numero autori:".$exactNumberOfAuthors;
+	    	$author2=ucwords($_POST["input-author2"]);
+	    	$queryAuthor="[author/.=\"$author0\" or author/.=\"$author1\" or author/.=\"$author2\"]";
 	    }
 	    if (strlen($_POST["input-author3"])>0 && $_POST["input-author3"]!="") {
-	    	$author3=$_POST["input-author3"];
-	    	$queryFilter.="";
+	    	$exactNumberOfAuthors=4;
+	    	echo "Settato Author 4, numero autori:".$exactNumberOfAuthors;
+	    	$author3=ucwords($_POST["input-author3"]);
+	    	$queryAuthor="[author/.=\"$author0\" or author/.=\"$author1\" or author/.=\"$author2\" or author/.=\"$author3\"]";
 	    }
-	    
-    }else{
-    	echo "Nessuna pubblicazione trovata per l'autore selezionato.";
-    }
-    
-    echo $queryFilter;
-    
+	    if (isset($_POST["only_these_author"])) {
+	    	$queryAuthor=str_replace(" or "," and ",$queryAuthor);
+	    	$queryAuthor=str_replace("]"," and count(author) = ".$exactNumberOfAuthors."]",$queryAuthor);
+		}
+	}
+
+    //echo $queryFilter."--".$queryAuthor;
     $pubblicazioniFiltrate = new DOMDocument();
     $root = $pubblicazioniFiltrate -> createElement("dblp");
     $pubblicazioniFiltrate -> appendChild($root);
     $xpath = new DOMXpath($pubblicazioni);
-    $query="/dblp/*".$queryFilter;
-    //echo $query;
+    $query="/dblp/*".$queryFilter.$queryAuthor;
     $values= $xpath->query($query);
     foreach ($values as $value) {
     	$value = $pubblicazioniFiltrate -> importNode($value , true);
         $root -> appendChild($value);
     }
     $pubblicazioniFiltrate -> saveXML();
-    
     $count = $pubblicazioniFiltrate -> childNodes -> item(0) -> childNodes -> length ;
-    echo $count;
+    
     if ($count) {
 	    date_default_timezone_set("Europe/Rome");
-	 	$data = date("Y-m-d_H:i:s");
+	 	$data = date("Ymd_His_");
 	 	$data_ymd = date("Ymd");
-	 	$ora_ricerca = date("his");
-	 	$URL_file = $data.$dblpkey_nome_autore;
-	    
-	    if (is_dir("tmp")) {
-	 		$pubblicazioniFiltrate -> save("tmp/".$URL_file.".xml");
-	 	}else{
+	 	$ora_ricerca = date("His");
+	 	$URL_file = $data.str_replace(' ','_',strtolower($dblpkey_nome_autore));    
+	 	if (!is_dir("tmp")) {
 	 		mkdir("tmp",0775);
 	 		chmod("tmp",0775);
-	 		$pubblicazioniFiltrate -> save("tmp/".$URL_file.".xml");
 	 	}
-	        
+	 	$pubblicazioniFiltrate -> save("tmp/".$URL_file.".xml");
+
+	 	if (!is_dir("utenti")) {
+	 		mkdir("utenti",0775);
+	 		chmod("utenti",0775);
+	 	}
+
+	 	chmod("tmp/".$URL_file.".xml",0775);
 	    saveSearch($_SESSION["user"],$ricerca_autore, $data_ymd,$ora_ricerca);
 	    if ($pubblicazioniFiltrate) {?>
-	    <div id="conferma_ricerca">
-	    	<img id="confirm_img" src="img/confirm.png" width="50" height="50" alt="confirm"/>
-	    	<p>Ricerca effettuata correttamente.</p>
-	    	<p>Data: <?php echo $data; ?></p>
-	    </div>
-	    
+	    	<div id="conferma_ricerca">
+	    		<img id="confirm_img" src="img/confirm.png" width="50" height="50" alt="confirm"/>
+	    		<p>Ricerca effettuata correttamente.</p>
+	    		<p>Data: <?php echo $data; ?></p>
+	    	</div>
 	    <?php
 	    }
 	  
-	    //Conversione con XSLT Processor
+	    //Conversione con XSLT Processor Saxon 9.3 Java
 	    
-	    $XSLT = new XSLTProcessor();
 	    $XSL_URL="";
-	    $XSL_Extension="";
+	    $estensioneFileOutput="";
+	    
+	    if (!is_dir("utenti/".$_SESSION["user"])) {
+			mkdir("utenti/".$_SESSION["user"],0775);
+			chmod("utenti/".$_SESSION["user"],0775);
+		}
 	
 	    switch ($_POST["conversion"]){
 		    case "html":
 	            $XSL_URL = "xsl/html.xsl";
-	            $XSL_Extension = ".html";
+	            $estensioneFileOutput = ".html";
+	            shell_exec('java -jar saxon9ee.jar tmp/'.$URL_file.'.xml '.$XSL_URL.' > utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput);
 	            break;
 	        case "bibtex":
 	            $XSL_URL = "xsl/bibtex.xsl";
-	            $XSL_Extension = "";
+	            $estensioneFileOutput = "";
+	            shell_exec('java -jar saxon9ee.jar tmp/'.$URL_file.'.xml '.$XSL_URL.' > utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput);
 	            break;
 	        case "graphml":
 	            $XSL_URL ="xsl/graphml.xsl";
-	            $XSL_Extension = ".xml";
+	            $estensioneFileOutput = ".xml";
+	            shell_exec('java -jar saxon9ee.jar tmp/'.$URL_file.'.xml '.$XSL_URL.' > utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput);
 	            break;
 	        case "graphviz":
 	            $XSL_URL = "xsl/graphviz.xsl";
-	            $XSL_Extension = ".dot";
+	            $estensioneFileOutput = ".dot";
+	            shell_exec('java -jar saxon9ee.jar tmp/'.$URL_file.'.xml '.$XSL_URL.' > utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput);
+	    		shell_exec('neato -Tpng utenti/'.$_SESSION["user"].'/'.$URL_file.'.dot > utenti/'.$_SESSION["user"].'/'.$URL_file.'.png');
 	            break;
-		}
-		
-		$XSL = new DOMDocument();
-		$XSL -> load($XSL_URL);
-		$XSLT -> importStylesheet($XSL);
-		$URL_origine = $URL_file.$XSL_Extension;
-		if (is_dir("utenti/".$_SESSION["user"])) {
-			$file= fopen("utenti/".$_SESSION["user"]."/".$URL_origine,"w");
-	    	fwrite($file,$XSLT->transformToXML( $pubblicazioniFiltrate ));
-	    	fclose($file);
-	    	//echo "utenti/".$_SESSION["user"]."/".$URL_origine;
-	    	chmod ("utenti/".$_SESSION["user"]."/".$URL_origine, 0775);
-		}else{
-			mkdir("utenti/".$_SESSION["user"],0775);
-			chmod("utenti/".$_SESSION["user"],0775);
-			$file= fopen("utenti/".$_SESSION["user"]."/".$URL_origine,"w");
-	    	fwrite($file,$XSLT->transformToXML( $pubblicazioniFiltrate ));
-	    	fclose($file);
-	    	//echo "utenti/".$_SESSION["user"]."/".$URL_origine;
-	    	chmod ("utenti/".$_SESSION["user"]."/".$URL_origine, 0775);
-		}
-	    
-	    
-	    }else{
-	    	echo "Nessuna pubblicazione trovata con i seguenti campi di ricerca.";
 	    }
+	    
+    }else{?>
+    	<div id="errore_ricerca">
+    		<img id="error_img" src="img/button_delete.gif" width="50" height="50" alt="error"/>
+    		<p>Nessun risultato trovato.</p>
+    	</div>
+    <?php
+    }
 }
 ?>
