@@ -40,14 +40,17 @@ session_start();
 				<div id="lista_file">
 				<h1>Lista File</h1>
 					<?php
+					$serverName=$_SERVER['SERVER_NAME'];
 					$dir = "utenti/".$_SESSION["user"];
 					if (is_dir($dir)) {
 					    if ($dh = opendir($dir)) {
 					        while (($file = readdir($dh)) !== false) {
-					        $link = "http://46.137.24.65/utenti/".$_SESSION["user"]."/".$file;
-					        ?>
-					        	<p><a href="<?php echo $link ?>"><?php echo $file;?></a></p>
-					        <?php
+					        	if (($file!=".")&($file!="..")) {
+					        		$link = "http://".$serverName."/utenti/".$_SESSION['user']."/".$file;
+					        		?>
+					        		<p><a href="<?php echo $link ?>"><?php echo $file;?></a></p>
+					        		<?php
+					        	}
 					        }
 					        closedir($dh);
 					    }

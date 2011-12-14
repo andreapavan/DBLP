@@ -85,6 +85,7 @@ function getUserData($username) {
 
 function modifyUserData() {
 	global $connetti;
+	$message='';
 	$currentUser=$_SESSION["user"];
 	$sqlGetId="SELECT id FROM progetto.utenti WHERE username='$currentUser'";
 	$result=mysql_query($sqlGetId,$connetti);
@@ -98,16 +99,16 @@ function modifyUserData() {
 	if ($nuovo_password==$nuovo_confirm_password && $nuovo_password!='' && $nuovo_confirm_password!='') {
 		$psw=md5($nuovo_password);
 		$sql_modify="UPDATE progetto.utenti SET username='$nuovo_username',nome='$nuovo_nome',cognome='$nuovo_cognome',email='$nuovo_email', password='$psw' WHERE id='$id[0]'";
+		$message="Modifica dati account DBLP,\n\nnome: $nuovo_nome\ncognome: $nuovo_cognome\nemail: $nuovo_email\n password:$nuovo_password";
 	}else{
 		$sql_modify="UPDATE progetto.utenti SET username='$nuovo_username',nome='$nuovo_nome',cognome='$nuovo_cognome',email='$nuovo_email' WHERE id='$id[0]'";
+		$message="Modifica dati account DBLP,\n\nnome: $nuovo_nome\ncognome: $nuovo_cognome\nemail: $nuovo_email";
 	}
 	$query=mysql_query($sql_modify,$connetti);
-	$message="Benvenuto, $nuovo_nome $nuovo_cognome. Hai deciso di cambaire i tuoi dati personali.\n\nNome: $nuovo_nome\nCognome: $nuovo_cognome\nE-mail: $nuova_email\nUsername: $nuovo_username\n";
 	$headers="From: andreapavan89@gmail.com";
-	mail($nuova_email,"Modica dati personali in DBLP Bibliography",$message,$headers);
+	mail($nuovo_email,"Modica dati personali in DBLP Bibliography",$message,$headers);
 	logout();
-	header("Location: index.php");
-
+	header ("Location: index.php");
 }
 
 function cancellaAccount($id) {
@@ -189,13 +190,17 @@ function curPageURL() {
 	----------------
 	HISTORY FUNCTION
 	----------------
-
 */
 
 function saveSearch($username,$author,$data,$ora) {
 	global $connetti;
 	$sql="INSERT INTO progetto.ricerche SET username='$username',autore='$author',data='$data',ora='$ora'";
 	$query=mysql_query($sql,$connetti);
+	/*if ($query) {
+		echo "ricerca salvata";
+	}else{
+		echo "errore salvataggio";
+	}*/
 }
 
 function deleteHistory($username) {

@@ -3,6 +3,7 @@
 if (isset($_POST["submit-search"])) {
 	if ($_POST["input-author"]!="") {
 		searchPubblication();
+		//echo "Submit premuto";
 	}else{?>
 		<div id="errore_ricerca">
     		<img id="error_img" src="img/button_delete.gif" width="50" height="50" alt="error"/>
@@ -10,6 +11,7 @@ if (isset($_POST["submit-search"])) {
     		<p>Controlla i campi di ricerca</p>
     	</div>
 	<?php
+	echo "Errore";
 	}
 }?>
 
@@ -72,49 +74,104 @@ $ricerca_autore=$_POST["input-author"];
 
     	$author0=ucwords($_POST["input-author"]);
 
-	    if (strlen($_POST["input-journal"])>0 && $_POST["input-journal"]!="") {
-	    	$journal=$_POST["input-journal"];
-	    	$queryFilter.="[contains(journal/.,\"".$journal."\")]";
-	    }
+    	// ***************** TITLE ********************
+
 	    if (strlen($_POST["input-title"])>0 && $_POST["input-title"]!="") {
 	    	$title=$_POST["input-title"];
-			$queryFilter.="[contains(title/.,\"".$title."\")]";
+			$queryTitle="[contains(title/.,\"".$title."\")]";
 	    }
+	     if (strlen($_POST["input-title1"])>0 && $_POST["input-title1"]!="") {
+	    	$title1=$_POST["input-title"];
+			$queryTitle="[contains(title/.,\"".$title1."\") or contains(title/.,\"".$title."\")]";
+	    }
+	     if (strlen($_POST["input-title2"])>0 && $_POST["input-title2"]!="") {
+	    	$title2=$_POST["input-title"];
+			$queryTitle="[contains(title/.,\"".$title2."\") or contains(title/.,\"".$title1."\") or contains(title/.,\"".$title."\")]";
+	    }
+	     if (strlen($_POST["input-title3"])>0 && $_POST["input-title3"]!="") {
+	    	$title3=$_POST["input-title"];
+			$queryTitle="[contains(title/.,\"".$title2."\") or contains(title/.,\"".$title1."\") or contains(title/.,\"".$title."\")]";
+	    }
+	    if ($_POST["filtro_title"]=="and") {
+			$queryTitle=str_replace(" or "," and ",$queryTitle);
+	    }
+
+	    // ***************** JOURNAL ********************
+
+	    if (strlen($_POST["input-journal"])>0 && $_POST["input-journal"]!="") {
+	    	$journal=$_POST["input-journal"];
+	    	$queryJournal="[contains(journal/.,\"".$journal."\")]";
+	    }
+	    if (strlen($_POST["input-journal1"])>0 && $_POST["input-journal1"]!="") {
+	    	$journal1=$_POST["input-journal1"];
+	    	$queryJournal="[contains(journal/.,\"".$journal1."\") or contains(journal/.,\"".$journal."\")]";
+	    }
+	    if (strlen($_POST["input-journal2"])>0 && $_POST["input-journal2"]!="") {
+	    	$journal2=$_POST["input-journal2"];
+	    	$queryJournal="[contains(journal/.,\"".$journal2."\") or contains(journal/.,\"".$journal1."\") or contains(journal/.,\"".$journal."\")]";
+	    }
+	    if (strlen($_POST["input-journal3"])>0 && $_POST["input-journal3"]!="") {
+	    	$journal3=$_POST["input-journal3"];
+	    	$queryJournal="[contains(journal/.,\"".$journal3."\") or contains(journal/.,\"".$journal2."\") or contains(journal/.,\"".$journal1."\") or contains(journal/.,\"".$journal."\")]";
+	    }
+
+	    // ***************** CONFERENCE ********************
+
 	    if (strlen($_POST["input-conference"])>0 && $_POST["input-conference"]!="") {
-	    	$conference=$_POST["input-conference"];
-	    	$queryFilter.="[contains(booktitle/.,\"".$conference."\")]";
+	    	$booktitle=$_POST["input-conference"];
+	    	$queryConference="[contains(booktitle/.,\"".$booktitle."\")]";
 	    }
+	    if (strlen($_POST["input-conference1"])>0 && $_POST["input-conference1"]!="") {
+	    	$booktitle1=$_POST["input-conference1"];
+	    	$queryConference="[contains(booktitle/.,\"".$booktitle1."\") or contains(booktitle/.,\"".$booktitle."\")]";
+	    }
+	    if (strlen($_POST["input-conference2"])>0 && $_POST["input-conference2"]!="") {
+	    	$booktitle2=$_POST["input-conference2"];
+	    	$queryConference="[contains(booktitle/.,\"".$booktitle2."\") or contains(booktitle/.,\"".$booktitle1."\") or contains(booktitle/.,\"".$booktitle."\")]";
+	    }
+	    if (strlen($_POST["input-conference3"])>0 && $_POST["input-conference3"]!="") {
+	    	$booktitle3=$_POST["input-conference3"];
+	    	$queryConference="[contains(booktitle/.,\"".$booktitle3."\") or contains(booktitle/.,\"".$booktitle2."\") or contains(booktitle/.,\"".$booktitle1."\") or contains(booktitle/.,\"".$booktitle."\")]";
+	    }
+
+	    // ***************** YEAR ********************
+
 	    if (strlen($_POST["minYear"])>0 && $_POST["minYear"]!="") {
 	    	$minYear=$_POST["minYear"];
-	    	$queryFilter.="[year>=$minYear]";
+	    	$queryYear="[year>=$minYear]";
 	    }
 	    if (strlen($_POST["maxYear"])>0 && $_POST["maxYear"]!="") {
 	    	$maxYear=$_POST["maxYear"];
-	    	$queryFilter.="[year<=$maxYear]";
+	    	$queryYear="[year<=$maxYear]";
 	    }
+
+	    // ***************** AUTHOR ********************
 
 	    if (strlen($_POST["input-author1"])>0 && $_POST["input-author1"]!="") {
 	    	$exactNumberOfAuthors=2;
-	    	echo "Settato Author 2, numero autori:".$exactNumberOfAuthors;
+	    	//echo "Settato Author 2, numero autori:".$exactNumberOfAuthors;
 	    	$author1=ucwords($_POST["input-author1"]);
 	    	$queryAuthor="[author/.=\"$author0\" or author/.=\"$author1\"]";
 	    }
 	    if (strlen($_POST["input-author2"])>0 && $_POST["input-author2"]!="") {
 	    	$exactNumberOfAuthors=3;
-	    	echo "Settato Author 3, numero autori:".$exactNumberOfAuthors;
+	    	//echo "Settato Author 3, numero autori:".$exactNumberOfAuthors;
 	    	$author2=ucwords($_POST["input-author2"]);
 	    	$queryAuthor="[author/.=\"$author0\" or author/.=\"$author1\" or author/.=\"$author2\"]";
 	    }
 	    if (strlen($_POST["input-author3"])>0 && $_POST["input-author3"]!="") {
 	    	$exactNumberOfAuthors=4;
-	    	echo "Settato Author 4, numero autori:".$exactNumberOfAuthors;
+	    	//echo "Settato Author 4, numero autori:".$exactNumberOfAuthors;
 	    	$author3=ucwords($_POST["input-author3"]);
 	    	$queryAuthor="[author/.=\"$author0\" or author/.=\"$author1\" or author/.=\"$author2\" or author/.=\"$author3\"]";
 	    }
-	    if (isset($_POST["only_these_author"])) {
-	    	$queryAuthor=str_replace(" or "," and ",$queryAuthor);
+	    if (($_POST["primo_filtro"])=="solo") {
 	    	$queryAuthor=str_replace("]"," and count(author) = ".$exactNumberOfAuthors."]",$queryAuthor);
 		}
+		if (($_POST["secondo_filtro"])=="and") {
+			$queryAuthor=str_replace(" or "," and ",$queryAuthor);
+		}
+
 	}
 
     //echo $queryFilter."--".$queryAuthor;
@@ -122,7 +179,7 @@ $ricerca_autore=$_POST["input-author"];
     $root = $pubblicazioniFiltrate -> createElement("dblp");
     $pubblicazioniFiltrate -> appendChild($root);
     $xpath = new DOMXpath($pubblicazioni);
-    $query="/dblp/*".$queryFilter.$queryAuthor;
+    $query="/dblp/*".$queryAuthor.$queryTitle.$queryConference.$queryYear.$queryJournal;
     $values= $xpath->query($query);
     foreach ($values as $value) {
     	$value = $pubblicazioniFiltrate -> importNode($value , true);
@@ -174,25 +231,31 @@ $ricerca_autore=$_POST["input-author"];
 	            $XSL_URL = "xsl/html.xsl";
 	            $estensioneFileOutput = ".html";
 	            shell_exec('java -jar saxon9ee.jar tmp/'.$URL_file.'.xml '.$XSL_URL.' > utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput);
+	            chmod('utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput,0775);
 	            break;
 	        case "bibtex":
 	            $XSL_URL = "xsl/bibtex.xsl";
 	            $estensioneFileOutput = "";
 	            shell_exec('java -jar saxon9ee.jar tmp/'.$URL_file.'.xml '.$XSL_URL.' > utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput);
+	            chmod('utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput,0775);
 	            break;
 	        case "graphml":
 	            $XSL_URL ="xsl/graphml.xsl";
 	            $estensioneFileOutput = ".xml";
 	            shell_exec('java -jar saxon9ee.jar tmp/'.$URL_file.'.xml '.$XSL_URL.' > utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput);
+	            chmod('utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput,0775);
 	            break;
 	        case "graphviz":
 	            $XSL_URL = "xsl/graphviz.xsl";
 	            $estensioneFileOutput = ".dot";
 	            shell_exec('java -jar saxon9ee.jar tmp/'.$URL_file.'.xml '.$XSL_URL.' > utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput);
+	            chmod('utenti/'.$_SESSION["user"].'/'.$URL_file.$estensioneFileOutput,0775);
 	    		shell_exec('neato -Tpng utenti/'.$_SESSION["user"].'/'.$URL_file.'.dot > utenti/'.$_SESSION["user"].'/'.$URL_file.'.png');
+	    		chmod('utenti/'.$_SESSION["user"].'/'.$URL_file.'.png',0775);
 	            break;
 	    }
-	    
+
+
     }else{?>
     	<div id="errore_ricerca">
     		<img id="error_img" src="img/button_delete.gif" width="50" height="50" alt="error"/>
